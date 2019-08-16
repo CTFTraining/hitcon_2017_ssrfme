@@ -15,11 +15,9 @@ RUN sed -i 's/deb.debian.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.li
     # remote ip
     && echo 'RemoteIPHeader X-Forwarded-For' >> /etc/apache2/mods-available/remoteip.load \
     && echo 'RemoteIPProxiesHeader X-Forwarded-For' >> /etc/apache2/mods-available/remoteip.load \
-    && echo 'RemoteIPInternalProxy ' >> /etc/apache2/mods-available/remoteip.load \
     && a2enmod remoteip \
     && sed -i -e '3s/.*/echo ZXZhbCAic2VkIC1pIC1lIFwicy9SZW1vdGVJUEludGVybmFsUHJveHkuKi9SZW1vdGVJUEludGVybmFsUHJveHkgXCQoY2F0IC9ldGMvaG9zdHMgfCBhd2sgJ0VORCB7cHJpbnQgXCQxfScpXC8yNC9cIiAvZXRjL2FwYWNoZTIvbW9kcy1hdmFpbGFibGUvcmVtb3RlaXAubG9hZCI= | base64 -d | sh/' /usr/local/bin/docker-php-entrypoint \
-    # flag
-    && echo "hitcon{Perl_<3_y0u}" > /flag \
-    && chmod u+s /readflag \
-    && chown root:root -R /var/www/html/ \
-    && chmod 400 /flag
+		&& mv /var/www/html/start.sh /start.sh \
+		&& chmod +x /start.sh
+
+ENTRYPOINT ["/start.sh"]
